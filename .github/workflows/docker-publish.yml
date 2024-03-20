@@ -21,7 +21,7 @@ jobs:
         with:
           image: python-app-image
           registry: ghcr.io
-          tags: latest
+          tags: v1.0
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_PASSWORD }}
 
