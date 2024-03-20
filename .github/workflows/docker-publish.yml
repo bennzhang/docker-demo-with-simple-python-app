@@ -16,55 +16,54 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: push docker image
-        uses: mr-smithers-excellent/docker-build-push@v6
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
-          image: python-app-image
-          registry: ghcr.io
-          tags: v1.0
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_PASSWORD }}
 
+      - name: Build and push AUTH service
+        run: |
+          docker build -t ghcr.io/oussamalakhdar/auth-service:django .
+          docker push ghcr.io/oussamalakhdar/auth-service:django
 
-# name: Build and Push Docker Images
+      # - name: push docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: python-app-image
+      #     registry: ghcr.io
+      #     tags: v1.0
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
 
-# on:
-#   push:
-#     branches: [ "master" ]
-#   pull_request:
-#     branches: [ "master" ]
+      # - name: push docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: auth-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/auth/intranetauth/compose/production/django/
+      #     tags: django
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
 
-# jobs:
-#   build-and-push:
-#     runs-on: ubuntu-latest
+      # - name: push docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: auth-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/auth/intranetauth/compose/production/postgres/
+      #     tags: postgres
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
 
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v2
+      # - name: push docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: auth-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/auth/intranetauth/compose/production/traefik/
+      #     tags: traefik
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
 
-#     - name: Login to Docker Hub
-#       uses: docker/login-action@v1
-#       with:
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
 
-#     - name: Build and push HR service
-#       run: |
-#         docker build -t olakhdar/python-github-actions .
-#         docker push olakhdar/python-github-actions
-
-    # - name: Build and push HR service
-    #   run: |
-    #     docker build -t your-dockerhub-username/hr-service ./hr-service
-    #     docker push your-dockerhub-username/hr-service
-
-    # - name: Build and push AUTH service
-    #   run: |
-    #     docker build -t your-dockerhub-username/auth-service ./auth-service
-    #     docker push your-dockerhub-username/auth-service
-
-    # - name: Build and push FINANCE service
-    #   run: |
-    #     docker build -t your-dockerhub-username/finance-service ./finance-service
-    #     docker push your-dockerhub-username/finance-service
-      
