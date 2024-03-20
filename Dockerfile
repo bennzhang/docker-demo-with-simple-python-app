@@ -17,7 +17,7 @@ COPY . /usr/src/app
 #ENV APP_ENV development
 ENV PORT 8080
 
-# Exposing Ports
+# Exposing Ports 
 EXPOSE $PORT
 
 # Setting Persistent data
