@@ -6,7 +6,7 @@ RUN mkdir -p /usr/src/app
 # Setting Home Directory for containers
 WORKDIR /usr/src/app
 
-# Installing python dependenciesss
+# Installing python dependencies
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
