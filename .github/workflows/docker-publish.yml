@@ -19,8 +19,9 @@ jobs:
       - name: push docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: oussamalakhdar/python-github-actions
+          image: python-app-image
           registry: ghcr.io
+          tags: latest
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_PASSWORD }}
 
