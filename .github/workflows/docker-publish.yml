@@ -16,27 +16,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.GHCR_USERNAME }}
-          password: ${{ secrets.GHCR_PASSWORD }}
-
-      - name: Build and push AUTH service
-        run: |
-          docker build -t ghcr.io/oussamalakhdar/auth-service:django .
-          docker push ghcr.io/oussamalakhdar/auth-service:django
-
-      # - name: push docker image
-      #   uses: mr-smithers-excellent/docker-build-push@v6
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v1
       #   with:
-      #     image: python-app-image
-      #     registry: ghcr.io
-      #     tags: v1.0
       #     username: ${{ secrets.GHCR_USERNAME }}
       #     password: ${{ secrets.GHCR_PASSWORD }}
 
-      # - name: push docker image
+      - name: docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: python-app-image
+          registry: ghcr.io
+          tags: v2.0
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_PASSWORD }}
+
+      
+      # - name: AUTH-django docker image
       #   uses: mr-smithers-excellent/docker-build-push@v6
       #   with:
       #     image: auth-service
@@ -46,7 +42,7 @@ jobs:
       #     username: ${{ secrets.GHCR_USERNAME }}
       #     password: ${{ secrets.GHCR_PASSWORD }}
 
-      # - name: push docker image
+      # - name: AUTH-postgres docker image
       #   uses: mr-smithers-excellent/docker-build-push@v6
       #   with:
       #     image: auth-service
@@ -56,7 +52,7 @@ jobs:
       #     username: ${{ secrets.GHCR_USERNAME }}
       #     password: ${{ secrets.GHCR_PASSWORD }}
 
-      # - name: push docker image
+      # - name: AUTH-traefik docker image
       #   uses: mr-smithers-excellent/docker-build-push@v6
       #   with:
       #     image: auth-service
@@ -65,5 +61,86 @@ jobs:
       #     tags: traefik
       #     username: ${{ secrets.GHCR_USERNAME }}
       #     password: ${{ secrets.GHCR_PASSWORD }}
+          
 
+      # - name: HR-django docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: hr-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/hr/compose/production/django/
+      #     tags: django
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
 
+      # - name: HR-nginx docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: hr-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/hr/compose/production/nginx/
+      #     tags: nginx
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+      # - name: HR-postgres docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: hr-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/hr/compose/production/postgres/
+      #     tags: postgres
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+      # - name: HR-traefik docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: hr-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/hr/compose/production/traefik/
+      #     tags: traefik
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+          
+      # - name: FINANCE-django docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: finance-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/finance/intrafinance/compose/production/django/
+      #     tags: django
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+      # - name: FINANCE-nginx docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: finance-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/finance/intrafinance/compose/production/nginx/
+      #     tags: nginx
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+      # - name: FINANCE-postgres docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: finance-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/finance/intrafinance/compose/production/postgres/
+      #     tags: postgres
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+
+      # - name: FINANCE-traefik docker image
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #     image: finance-service
+      #     registry: ghcr.io
+      #     dockerfile: ./backend/finance/intrafinance/compose/production/traefik/
+      #     tags: traefik
+      #     username: ${{ secrets.GHCR_USERNAME }}
+      #     password: ${{ secrets.GHCR_PASSWORD }}
+        
